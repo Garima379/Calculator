@@ -17,13 +17,13 @@ const Calculator = () => {
     } else if (value === 'C') {
       setInput('');
     } else if (value === '⌫') {
-      setInput(input.slice(0, -1));
+      setInput((prev) => prev.slice(0, -1));
     } else if (value === '+/-') {
       if (input) {
-        setInput(input.startsWith('-') ? input.slice(1) : '-' + input);
+        setInput((prev) => (prev.startsWith('-') ? prev.slice(1) : '-' + prev));
       }
     } else {
-      setInput(input + value);
+      setInput((prev) => prev + value);
     }
   };
 
@@ -50,10 +50,16 @@ const Calculator = () => {
   }, [input]);
 
   return (
-    <Box sx={{ width: 300, margin: '50px auto' }}>
-      <Paper elevation={4} sx={{ padding: 2 }}>
+    <Box
+      sx={{
+        maxWidth: 400,
+        width: '90%',
+        margin: '20px auto',
+      }}
+    >
+      <Paper elevation={4} sx={{ padding: { xs: 2, sm: 3 } }}>
         <Typography variant="h5" align="center" gutterBottom>
-          React Calculator
+          Calculator
         </Typography>
         <Display value={input} />
         <ButtonPanel onClick={handleButtonClick} />
@@ -63,4 +69,5 @@ const Calculator = () => {
 };
 
 export default Calculator;
+
 
